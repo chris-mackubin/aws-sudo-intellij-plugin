@@ -28,7 +28,7 @@ public class AwsSudoConfigurationType implements ConfigurationType {
 
     @Override
     public Icon getIcon() {
-        return AllIcons.General.Information;
+        return AwsSudoIcons.AwsSudo16;
     }
 
     @Override
