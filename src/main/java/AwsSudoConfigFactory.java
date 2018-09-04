@@ -6,7 +6,7 @@ import com.intellij.openapi.project.Project;
 
 public class AwsSudoConfigFactory extends ConfigurationFactory {
 
-    private static final String FACTORY_NAME = "aws-sudo configuration factory";
+    private static final String FACTORY_NAME = "aws-sudo";
 
     protected AwsSudoConfigFactory(ConfigurationType type) {
         super(type);
@@ -14,12 +14,22 @@ public class AwsSudoConfigFactory extends ConfigurationFactory {
 
     @Override
     public RunConfiguration createTemplateConfiguration(Project project) {
-        return new AwsSudoConfiguration(project, this, "aws-sudo");
+        AwsSudoConfiguration configuration = new AwsSudoConfiguration(project, this, "aws-sudo");
+        String path = project.getBasePath();
+        if (path != null) {
+            configuration.setWorkingDirectory(path);
+        }
+        return configuration;
     }
 
     @Override
     public String getName() {
         return FACTORY_NAME;
+    }
+
+    @Override
+    public boolean isConfigurationSingletonByDefault() {
+        return true;
     }
 
 }
